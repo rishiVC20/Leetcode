@@ -10,6 +10,8 @@ public:
             for (int j=0; j<m; j++)
             {
                 int mini = INT_MAX;
+                if (i==0 && j==0)  
+                    continue;
                 if (i!=0)
                     mini = min(mini,grid[i-1][j]);
                 if (j!=0)
