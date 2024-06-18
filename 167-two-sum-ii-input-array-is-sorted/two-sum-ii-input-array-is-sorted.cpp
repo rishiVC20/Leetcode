@@ -9,12 +9,13 @@ public:
             int x = upper_bound(numbers.begin(),numbers.end(),k)-numbers.begin();
             x--;
             if (x<n && numbers[x]+numbers[i]==target){
-                a.push_back(i+1);
-                a.push_back(x+1);
+                // a.push_back(i+1);
+                // a.push_back(x+1);
+                return {i+1,x+1};
                 break;
             }
         }
 
-        return a;
+        return {};
     }
 };
