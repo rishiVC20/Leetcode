@@ -52,17 +52,19 @@ public:
         // if (maxx==-1 || maxy==-1)
         //     return 0;
 
-        int cp;
-        if (maxx-minx == 0)
-            cp = 1;
-        else
-            cp = maxx-minx + 1;
-        int kp;
-        if (maxy-miny == 0)
-            kp = 1;
-        else
-            kp = maxy-miny + 1;
+        // int cp;
+        // if (maxx-minx == 0)
+        //     cp = 1;
+        // else
+        //     cp = maxx-minx + 1;
+        // int kp;
+        // if (maxy-miny == 0)
+        //     kp = 1;
+        // else
+        //     kp = maxy-miny + 1;
 
-        return cp*kp;                
+        // return cp*kp;   
+
+        return (maxx-minx+1)*(maxy-miny+1);             
     }
 };
