@@ -49,8 +49,8 @@ public:
             if (f)
                 break;
         }
-        if (maxx==-1 || maxy==-1)
-            return 0;
+        // if (maxx==-1 || maxy==-1)
+        //     return 0;
 
         int cp;
         if (maxx-minx == 0)
