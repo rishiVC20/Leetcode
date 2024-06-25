@@ -11,36 +11,39 @@
  */
 class Solution {
 public:
-    void inorder(TreeNode* &root, vector<int>&ans){
+    void inorder(vector<int> &arr, TreeNode* &root){
         if (root == NULL)
             return;
 
-        inorder(root->left,ans);
-        ans.push_back(root->val);
-        inorder(root->right,ans);    
+        inorder(arr,root->left);
+        arr.push_back(root->val);
+        inorder(arr,root->right);    
     }
-    void sum(vector<int> &ans, int n){
-        for (int i = n-2; i>=0; i--){
-            ans[i] +=ans[i+1];
+    void sum(vector<int> &arr, int n){
+        for (int i=n-2; i>=0; i--){
+            arr[i] += arr[i+1];
         }
     }
-    
-    void updateBST(TreeNode* &root, vector<int> &ans, int &index){
-        if (root == NULL)
+    void updateTree(vector<int> &arr, int &index, TreeNode* &root){
+        if (root == NULL)   
             return;
-
-        updateBST(root->left,ans,index);
-        root->val = ans[index++];
-        updateBST(root->right, ans,index);
-        // return root;    
+        updateTree(arr,index,root->left);
+        root->val = arr[index++];
+        updateTree(arr,index,root->right);    
     }
     TreeNode* bstToGst(TreeNode* root) {
-        vector<int>ans;
-        inorder(root,ans);
+        vector<int>arr;
+        inorder(arr,root);
+        for (auto i:arr)
+            cout<<i<<' ';
+        cout<<endl;    
+        int n = arr.size();
+        sum (arr,n);
+        for (auto i:arr)
+            cout<<i<<' ';
         int index = 0;
-        int n = ans.size();
-        sum(ans,n);
-        updateBST(root,ans,index);
+        updateTree(arr,index,root);
+
         return root;
     }
 };
