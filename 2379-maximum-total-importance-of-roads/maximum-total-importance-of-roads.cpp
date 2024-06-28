@@ -27,12 +27,12 @@ public:
         for (auto i:v){
             // long long q = v[k].second.size();
             long long q = i.second;
-            if (q > 0){
+            // if (q > 0){
                 long long z = i.first;
                 cout<<z<<' ';
                 a[z] = m;
                 m--;
-            }
+            // }
             // k++;
         }
         // for (auto i:a){
