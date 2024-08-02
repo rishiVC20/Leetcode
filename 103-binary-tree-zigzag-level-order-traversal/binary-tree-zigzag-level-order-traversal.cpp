@@ -24,15 +24,23 @@ public:
             for (int i=0; i<size; i++){
                 TreeNode* first = q.front();
                 q.pop();
-                int in = f ? i:size-i-1;
-                ans[in] = first->val;
+                // int in = f ? i:size-i-1;
+                ans[i] = first->val;
                 if (first->left)
                     q.push(first->left);
                 if (first->right)
                     q.push(first->right);    
             }
-            f=!f;
+            // f=!f;
             sol.push_back(ans);
+        }
+        for (int i=0; i<sol.size(); i++){
+            if (!f){
+                vector<int>kp = sol[i];
+                reverse(kp.begin(),kp.end());
+                sol[i] = kp;
+            }
+            f=!f;
         }
 
         return sol;
