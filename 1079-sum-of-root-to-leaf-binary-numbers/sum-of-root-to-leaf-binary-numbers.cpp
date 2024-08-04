@@ -11,37 +11,61 @@
  */
 class Solution {
 public:
-    int toDec(string s){
-        int sum = 0;
-        int n = s.size();
-        n--;
-        int i=0;
-        while (n>=0){
-            int k = s[n]-'0';
-            sum += k*pow(2,i);
-            i++;
-            n--;
-        }
-
-        return sum;
-    }
-    void solve(TreeNode* root, string s, int &ans){
+    void check(TreeNode* root, vector<string> &ans, string s){
         if (root==NULL)
             return;
-
-        s.push_back(root->val + '0');    
+        s += to_string(root->val);    
         if (root->left==NULL && root->right==NULL){
-            ans += toDec(s);
-        }    
-        solve(root->left,s,ans);
-        solve(root->right,s,ans);
+            
+            if (s.size()>0)
+                ans.push_back(s);
+            // s = "";    
+            return;
+        }
 
-        // return ans;
+        // string s = "";  
+        // char c = (char)(root->val);
+        // int c = root->val;
+        // string t = to_string(c);
+        // // cout<<c<<' ';
+        // s += t;
+        check(root->left,ans,s);
+        // s.pop_back();
+        check(root->right,ans,s);  
+    }
+    int binTo(string x){
+        // int p = stoi(x);
+         
+        int ans = 0;
+        int d=0;
+        int n = x.size();
+        n--;
+        while (n>=0){
+            int k = x[n]-'0';
+            ans += k*pow(2,d);
+            d++;
+            n--;
+        }
+        // cout<<ans<<' ';
+        return ans;
     }
     int sumRootToLeaf(TreeNode* root) {
-        string s;
-        int ans = 0;
-        solve(root,s,ans);
-        return ans;
+        vector<string>ans;
+        string s = "";
+        check(root,ans,s);
+        vector<int>a;
+        // cout<<ans.size();
+        // for (int i=0; i<ans.size(); i++){
+        //     cout<<ans[i]<<' ';
+        // }
+        for (auto i:ans){
+            // cout<<i<<' ';
+            int k = binTo(i);
+            // cout<<k<<' ';
+            a.push_back(k);
+        }
+        for (auto i:a)
+            cout<<i<<' ';
+        return accumulate(a.begin(),a.end(),0);
     }
 };
