@@ -1,35 +1,36 @@
 class Solution {
 public:
     vector<vector<int>> spiralMatrixIII(int rows, int cols, int rStart, int cStart) {
-        int i = rStart, j = cStart;
-        int diri = 0, dirj = 1; // directions to move
-        int twice = 2;
-        vector<vector<int>> res;
-        int moves = 1;
-        int next_moves = 2;
+        int n = rows*cols;
+        vector<vector<int>>v(n,vector<int>(2));
+        
+        vector<vector<int>>a={{0,1},{1,0},{0,-1},{-1,0}};
 
-        while (res.size() < rows * cols) {
-            if (i >= 0 && i < rows && j >= 0 && j < cols) {
-                res.push_back({i, j});
-            }
-
-            i += diri;
-            j += dirj;
-            moves -= 1;
-            if (moves == 0) {
-                int temp = diri;
-                diri = dirj;
-                dirj = -temp; // right direction
-                twice -= 1;
-                if (twice == 0) {
-                    twice = 2;
-                    moves = next_moves;
-                    next_moves += 1;
-                } else {
-                    moves = next_moves - 1;
+        int count=1;
+        int step=1;
+        int k1=rStart;
+        int k2=cStart;
+        v[0][0]=k1,v[0][1]=k2;
+        int index=0;
+        // v.push_back(k1,k2)
+        while(count<n){
+            for(int i=0; i<2; i++){
+                int dr=a[index%4][0];
+                int dc=a[index%4][1];
+                for (int j=0; j<step; j++){
+                    k1 += dr;
+                    k2 += dc;
+                    if (k1>=0 && k1<rows && k2>=0 && k2<cols){
+                        v[count][0]=k1;
+                        v[count][1]=k2;
+                        count++;
+                    }
                 }
+                index++;
             }
+            step++;
         }
-        return res;
+
+        return v;
     }
 };
