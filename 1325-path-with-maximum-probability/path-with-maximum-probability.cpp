@@ -1,35 +1,33 @@
+#define ll long long
 class Solution {
 public:
     double maxProbability(int n, vector<vector<int>>& edges, vector<double>& succProb, int start_node, int end_node) {
-        unordered_map<int,vector<pair<int,double>>>mp;
-        for(int i=0; i<edges.size(); i++){
-            int u=edges[i][0];
-            int v=edges[i][1];
-            mp[u].push_back({v,succProb[i]});
-            mp[v].push_back({u,succProb[i]});
+        unordered_map<ll,vector<pair<ll,double>>>mp;
+        for(ll i=0; i<edges.size(); i++){
+            ll x=edges[i][0],y=edges[i][1];
+            mp[x].push_back({y,succProb[i]});
+            mp[y].push_back({x,succProb[i]});
         }
-        priority_queue<pair<int,double>>pq;
-        vector<double>res(n,0);
-        res[start_node]=1;
+        priority_queue<pair<ll,double>>pq;
+        vector<double>v(n,0);
         pq.push({start_node,1.0});
+        v[start_node]=1;
         while(!pq.empty()){
             auto it=pq.top();
-            int x=it.first;
-            double y=it.second;
+            ll k=it.first;
+            double q=it.second;
             pq.pop();
-            for(auto i:mp[x]){
-                int k=i.first;
-                double m=i.second;
-                if(res[k] < m*y){
-                    res[k]=m*y;
-                    pq.push({k,res[k]});
+            for(auto i:mp[k]){
+                ll c=i.first;
+                double d=i.second;
+                if(v[c]<d*q){
+                    v[c]=d*q;
+                    pq.push({c,d*q});
                 }
                 
             }
-            
         }
-        for(auto i:res)
-            cout<<i<<' ';
-        return res[end_node];
+
+        return v[end_node];
     }
 };
