@@ -12,37 +12,35 @@
 class Solution {
 public:
     vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
-        vector<vector<int>>sol;
-        if (root==NULL) 
-            return sol;
+        vector<vector<int>>ans;
         queue<TreeNode*>q;
         q.push(root);
-        bool f=true;
-        while (!q.empty()){
-            int size = q.size();
-            vector<int>ans(size);
-            for (int i=0; i<size; i++){
-                TreeNode* first = q.front();
+        bool f=false;
+        if(root==NULL)
+            return {};
+        while(!q.empty()){
+            int sz=q.size();
+            // cout<<sz<<' ';
+            vector<int>d;
+            for(int i=0; i<sz; i++){
+                TreeNode* p=q.front();
+                // cout<<p->val<<' ';
                 q.pop();
-                // int in = f ? i:size-i-1;
-                ans[i] = first->val;
-                if (first->left)
-                    q.push(first->left);
-                if (first->right)
-                    q.push(first->right);    
+                if(p->left != NULL)
+                    q.push(p->left);
+                if(p->right != NULL)
+                    q.push(p->right);
+                d.push_back(p->val);
             }
-            // f=!f;
-            sol.push_back(ans);
-        }
-        for (int i=0; i<sol.size(); i++){
-            if (!f){
-                vector<int>kp = sol[i];
-                reverse(kp.begin(),kp.end());
-                sol[i] = kp;
-            }
+            if(!f)
+                ans.push_back(d);
+            else{
+                reverse(d.begin(),d.end());
+                ans.push_back(d);
+            }    
             f=!f;
+                
         }
-
-        return sol;
+        return ans;
     }
 };
