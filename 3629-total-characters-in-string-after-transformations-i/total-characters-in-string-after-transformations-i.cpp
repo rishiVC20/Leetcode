@@ -17,7 +17,7 @@ public:
                     v[1] += (a[j]%mod);
                     break;
                 }
-                v[j+1]=a[j];
+                v[j+1]=(a[j]%mod);
             }
             a=v;
         }
