@@ -13,31 +13,9 @@ public:
         }
         if(k1!=k2 || g1!=g2)
             return false;
-        int j=n-1;
-        int k=0;
-        vector<int>left(n,0),right(n,0);
+        
         vector<pair<char,int>>v;
-        while(j>=0){
-            if(start[j]=='L'){
-                k=1;
-            }
-            if(start[j]=='R'){
-                k=0;
-            }
-            left[j]=k;
-            j--;
-        }
-        j=0;
-        while(j<n){
-            if(start[j]=='R'){
-                k=1;
-            }
-            if(start[j]=='L'){
-                k=0;
-            }
-            right[j]=k;
-            j++;
-        }
+        
         for(int i=0; i<n; i++){
             if(start[i]!='_'){
                 v.push_back({start[i],i});
