@@ -1,22 +1,28 @@
 class Solution {
 public:
     string clearDigits(string s) {
-        string ss = "";
-        int n = s.size();
-        int i=0; 
-        while (i<n)
-        {
-            if (!isdigit(s[i])){
-                ss += s[i];
-                i++;
-            }
-            else{
-                i++;
-                if (ss.size()>0)
-                    ss.pop_back();
+        int n=s.size();
+        vector<bool>f(n,true);
+        int j=-1;
+        for(int i=0; i<n; i++){
+            if(s[i]>='0' && s[i]<='9'){
+                f[i]=false;
+                for(int j=i-1; j>=0; j--){
+                    if(s[j]>='a' && s[j]<='z' && f[j]==true){
+                        f[j]=false;
+                        break;
+                    }
+                }
             }
         }
 
-        return ss;
+        string p="";
+        for(int i=0; i<n; i++){
+            if(f[i]==true){
+                p.push_back(s[i]);
+            }
+        }
+
+        return p;
     }
 };
