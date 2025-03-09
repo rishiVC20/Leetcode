@@ -1,26 +1,35 @@
 class Solution {
 public:
     int numberOfAlternatingGroups(vector<int>& colors, int k) {
-        int n = colors.size();
-        vector<int>a(2*n);
-        for (int i=0; i<n; i++){
-            a[i] = colors[i];
-            a[i+n] = colors[i];
+        int n=colors.size();
+        for(int i=0; i<n; i++){
+            colors.push_back(colors[i]);
         }
 
-        int count = 1;
-        int sum = 0;
-        for (int i=1; i<n+k-1; i++){
-            // cout<<i<<' ';
-            if (a[i] != a[i-1])
-                count++;
-            else
-                count = 1;
-            // cout<<count<<' ';    
-            if (count >= k)
-                sum++;        
+        vector<int>a;
+        int cur=1;
+        for(int i=1; i<=n+k-2; i++){
+            if(colors[i]!=colors[i-1]){
+                cur++;
+            }
+            else if(cur>1){
+                a.push_back(cur);
+                cur=1;
+            }
+        }
+        if(cur>1){
+            a.push_back(cur);
         }
 
-        return sum;
+        int ans=0;
+        for(auto i:a){
+            cout<<i<<' ';
+            int p=i-k+1;
+            if(p>0){
+                ans+=p;
+            }
+        }
+
+        return ans;
     }
 };
