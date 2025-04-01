@@ -19,24 +19,25 @@ public:
         string d="";
         d.push_back(s[0]);
         for(int i=1; i<n; i++){
-            int kp1=mx+1,kp2=mx+2;
             string d1="",d2="";
             int ind1=i-mx,ind2=i-mx-1;
+            int kp=mx;
             if(ind1>=0){
                 d1=s.substr(ind1,mx+1);
                 // mx=max(mx,mx+1);
                 if(checkPalin(d1)){
-                    mx=max(mx,mx+1);
+                    kp=max(mx,mx+1);
                     d=d1;
                 }
             }
             if(ind2>=0){
                 d2=s.substr(ind2,mx+2);
                 if(checkPalin(d2)){
-                    mx=max(mx,mx+2);
+                    kp=max(mx,mx+2);
                     d=d2;
                 }
             }
+            mx=kp;
         }
 
         return d;
