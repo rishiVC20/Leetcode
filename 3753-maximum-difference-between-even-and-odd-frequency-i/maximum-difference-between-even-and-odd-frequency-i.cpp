@@ -15,9 +15,9 @@ public:
             }
         }
 
-        if(mini==INT_MAX){
-            mini=0;
-        }
+        // if(mini==INT_MAX){
+        //     mini=0;
+        // }
         return maxi-mini;
     }
 };
